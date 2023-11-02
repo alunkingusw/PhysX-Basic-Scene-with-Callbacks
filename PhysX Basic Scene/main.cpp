@@ -61,18 +61,14 @@ int main() {
 		pvdClient->setScenePvdFlag(PxPvdSceneFlag::eTRANSMIT_SCENEQUERIES, true);
 	}
 
-	
-
-	
-
-
-	
-
 	//create ground plane
 	PxMaterial* groundMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
 	PxTransform groundTransform = PxTransform(PxQuat(PxHalfPi, PxVec3(0, 0, 1)));
 	PxRigidStatic* groundPlane = PxCreateStatic(*physics, groundTransform, PxPlaneGeometry(), *groundMaterial);
+	//set the flags for collision callbacks between the floor and a box
+	setupFiltering(groundPlane, FilterGroup::eFLOOR, FilterGroup::eBOX);
 	scene->addActor(*groundPlane);
+
 
 	//create stacked boxes
 	PxMaterial* boxMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
@@ -83,8 +79,10 @@ int main() {
 		PxTransform boxTransform(PxVec3(0.0f, i * (2 * boxHalfExtent + boxSpacing), 0.0f));
 		PxBoxGeometry boxGeometry(PxVec3(boxHalfExtent, boxHalfExtent, boxHalfExtent));
 		PxRigidDynamic* box = PxCreateDynamic(*physics, boxTransform, boxGeometry, *boxMaterial, 1.0f);
-		// Set the flag
+		// Set the flag for notification callback when sleeping and waking
 		box->setActorFlag(PxActorFlag::eSEND_SLEEP_NOTIFIES, true);
+		//set the flags for collision callbacks between boxes
+		setupFiltering(box, FilterGroup::eBOX, FilterGroup::eBOX);
 		scene->addActor(*box);
 	}
 
