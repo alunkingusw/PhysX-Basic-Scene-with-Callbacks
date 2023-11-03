@@ -1,8 +1,7 @@
 #pragma once
-#include "PxPhysicsAPI.h";
 
-#include <iostream>;
-
+#include <iostream>
+#include "PxPhysicsAPI.h"
 
 class SoundEventCallback : public physx::PxSimulationEventCallback{
 public:

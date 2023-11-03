@@ -1,7 +1,7 @@
 // CharacterController.h
 
 #pragma once
-
+#include "PxPhysicsAPI.h"
 #include <characterkinematic/PxCapsuleController.h>
 #include <characterkinematic/PxControllerManager.h>
 
