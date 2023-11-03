@@ -1,9 +1,10 @@
 #include <ctype.h>
 #include <iostream>
-#include "PxPhysicsAPI.h"
-#include "SoundEventCallback.h"
 #include <chrono>
 #include <thread>
+#include "PxPhysicsAPI.h"
+#include "SoundEventCallback.h"
+#include "CharacterController.h"
 using namespace physx;
 
 PxPvd* mPvd = NULL;
@@ -86,11 +87,23 @@ int main() {
 		scene->addActor(*box);
 	}
 
+	//create a controller manager
+	PxControllerManager* controllerManager = PxCreateControllerManager(*scene);
+
+
+	// Create a character controller
+	CharacterController* characterController = new CharacterController(controllerManager, physx::PxExtendedVec3(0.0, 1.0, 0.0));
+
+
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 
 	//create a simulation loop
 	const float timeStep = 1.0f / 60.0f;
 	while (true) {
+
+		// Process input and update character controller
+		characterController->update(timeStep);
+
 		//simulate the scene
 		scene->simulate(timeStep);
 		scene->fetchResults(true);
@@ -109,6 +122,8 @@ int main() {
 		lastFrameTime = std::chrono::high_resolution_clock::now();
 	}
 
+	// Cleanup
+	delete characterController;
 	scene->release();
 	physics->release();
 	mFoundation->release();
