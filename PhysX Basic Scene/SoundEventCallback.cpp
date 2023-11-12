@@ -2,7 +2,8 @@
 
 // Custom collision callback class
 
-    void SoundEventCallback::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs) {
+    void SoundEventCallback::onContact(const physx::PxContactPairHeader& pairHeader, 
+        const physx::PxContactPair* pairs, physx::PxU32 nbPairs) {
         // Iterate through contact pairs
         
         for (physx::PxU32 i = 0; i < nbPairs; i++) {
@@ -36,7 +37,8 @@
         }
     }
 
-    void SoundEventCallback::onAdvance(const physx::PxRigidBody* const* bodyBuffer, const physx::PxTransform* poseBuffer, const physx::PxU32 count) {
+    void SoundEventCallback::onAdvance(const physx::PxRigidBody* const* bodyBuffer, 
+        const physx::PxTransform* poseBuffer, const physx::PxU32 count) {
         for (physx::PxU32 i = 0; i < count; i++) {
             const physx::PxRigidBody* body = bodyBuffer[i];
             const physx::PxTransform& pose = poseBuffer[i];
@@ -51,7 +53,10 @@
         }
     }
 
-    physx::PxFilterFlags boxCollisionFilterShader(physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0, physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1, physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
+    physx::PxFilterFlags boxCollisionFilterShader(
+        physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0, 
+        physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1, 
+        physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
     {
        
         // let triggers through
