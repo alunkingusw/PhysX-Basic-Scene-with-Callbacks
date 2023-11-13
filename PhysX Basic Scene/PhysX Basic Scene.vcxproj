@@ -131,10 +131,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SoundEventCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterController.h" />
     <ClInclude Include="SoundEventCallback.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

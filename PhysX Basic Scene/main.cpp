@@ -90,10 +90,18 @@ int main() {
 	//create a controller manager
 	PxControllerManager* controllerManager = PxCreateControllerManager(*scene);
 
+	// Create Character instance
+	CharacterController character(controllerManager, scene);
 
+	// Call createCharacter to initialize the character
+	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
+	character.createCharacter(physx::PxExtendedVec3(0.5, 1.0, 0.5), characterMaterial);
+
+	// Update and control the character in your game loop
+	character.moveForward(1.0f);
 	// Create a character controller
 	//CharacterController* characterController = new CharacterController(controllerManager, physx::PxExtendedVec3(0.0, 1.0, 0.0));
-	PxCapsuleControllerDesc desc;
+	/*PxCapsuleControllerDesc desc;
 	desc.setToDefault();
 	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
 	desc.material = characterMaterial;
@@ -104,8 +112,9 @@ int main() {
 	//desc.material = boxMaterial;
 	PxController* c = controllerManager->createController(desc);
 	scene->addActor(*c->getActor());
+	*/
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
-
+	
 	//create a simulation loop
 	const float timeStep = 1.0f / 60.0f;
 	while (true) {
@@ -116,7 +125,8 @@ int main() {
 		//simulate the scene
 		scene->simulate(timeStep);
 		scene->fetchResults(true);
-
+		// Update and control the character in your game loop
+		character.moveForward(1.0f);
 		//add sleep to control the frame rate.
 		// Calculate the time elapsed since the last frame
 		std::chrono::duration<float> elapsedTime = 
