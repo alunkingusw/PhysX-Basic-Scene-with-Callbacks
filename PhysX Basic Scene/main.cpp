@@ -92,9 +92,18 @@ int main() {
 
 
 	// Create a character controller
-	CharacterController* characterController = new CharacterController(controllerManager, physx::PxExtendedVec3(0.0, 1.0, 0.0));
-
-
+	//CharacterController* characterController = new CharacterController(controllerManager, physx::PxExtendedVec3(0.0, 1.0, 0.0));
+	PxCapsuleControllerDesc desc;
+	desc.setToDefault();
+	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
+	desc.material = characterMaterial;
+	desc.radius = 0.5f;        // Set the radius of the capsule
+	desc.height = 2.0f;        // Set the height of the capsule  // Set the initial position of the capsule
+	desc.upDirection = physx::PxVec3(0, 1, 0);  // Set the up direction
+	desc.position = physx::PxExtendedVec3(0.5, 1.0, 0.5);
+	//desc.material = boxMaterial;
+	PxController* c = controllerManager->createController(desc);
+	scene->addActor(*c->getActor());
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 
 	//create a simulation loop
@@ -102,7 +111,7 @@ int main() {
 	while (true) {
 
 		// Process input and update character controller
-		characterController->update(timeStep);
+		//characterController->update(timeStep);
 
 		//simulate the scene
 		scene->simulate(timeStep);
@@ -123,7 +132,8 @@ int main() {
 	}
 
 	// Cleanup
-	delete characterController;
+	//delete characterController;
+	controllerManager->purgeControllers();
 	scene->release();
 	physics->release();
 	mFoundation->release();
