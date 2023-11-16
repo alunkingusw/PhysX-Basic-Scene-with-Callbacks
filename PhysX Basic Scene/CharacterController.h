@@ -1,5 +1,7 @@
 #pragma once
 
+//add library for key listening
+#include <conio.h>
 #include "PxPhysicsAPI.h"
 
 class CharacterController {
@@ -9,6 +11,7 @@ public:
 
     void createCharacter(const physx::PxExtendedVec3& position, physx::PxMaterial* characterMaterial);
     void moveForward(float distance);
+    void moveLeft(float distance);
     void jump();
     void update(float deltaTime);
 
@@ -17,3 +20,6 @@ private:
     physx::PxScene* scene;
     physx::PxCapsuleController* capsuleController;
 };
+
+bool isKeyPressed(int key);
+

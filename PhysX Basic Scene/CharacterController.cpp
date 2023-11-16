@@ -48,6 +48,29 @@ void CharacterController::moveForward(float distance) {
     }
 
 }
+void CharacterController::moveLeft(float distance) {
+    // Implement movement logic
+    if (capsuleController) {
+        // Get the current controller state
+        physx::PxControllerState state;
+        capsuleController->getState(state);
+
+        // Get the controller's transform
+        physx::PxTransform transform = capsuleController->getActor()->getGlobalPose();
+
+        // Get the forward direction from the transform
+        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(1, 0, 0));
+
+        // Calculate the movement vector
+        physx::PxVec3 movement = forwardDir * distance;
+
+        // Move the controller
+        physx::PxControllerFilters filters;
+        capsuleController->move(movement, 0.0f, 0.001f, filters);
+
+    }
+
+}
 
 void CharacterController::jump() {
     // Implement jump logic
@@ -66,4 +89,9 @@ void CharacterController::jump() {
 
 void CharacterController::update(float deltaTime) {
     // Implement update logic
+}
+
+bool isKeyPressed(int key)
+{
+    return _kbhit() && _getch() == key;
 }

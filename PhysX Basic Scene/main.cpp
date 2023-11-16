@@ -95,24 +95,8 @@ int main() {
 
 	// Call createCharacter to initialize the character
 	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
-	character.createCharacter(physx::PxExtendedVec3(-0.5, -1.0, 0.5), characterMaterial);
+	character.createCharacter(physx::PxExtendedVec3(5.0, 0.5, 5.0), characterMaterial);
 
-	// Update and control the character in your game loop
-	character.moveForward(1.0f);
-	// Create a character controller
-	//CharacterController* characterController = new CharacterController(controllerManager, physx::PxExtendedVec3(0.0, 1.0, 0.0));
-	/*PxCapsuleControllerDesc desc;
-	desc.setToDefault();
-	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
-	desc.material = characterMaterial;
-	desc.radius = 0.5f;        // Set the radius of the capsule
-	desc.height = 2.0f;        // Set the height of the capsule  // Set the initial position of the capsule
-	desc.upDirection = physx::PxVec3(0, 1, 0);  // Set the up direction
-	desc.position = physx::PxExtendedVec3(0.5, 1.0, 0.5);
-	//desc.material = boxMaterial;
-	PxController* c = controllerManager->createController(desc);
-	scene->addActor(*c->getActor());
-	*/
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 	
 	//create a simulation loop
@@ -128,12 +112,20 @@ int main() {
 		scene->fetchResults(true);
 		// Update and control the character in your game loop
 		++frameCount;
-		if (frameCount > 1000) {
-			character.moveForward(0.001f);
+		if (isKeyPressed('W')) {
+			// Move the character forward
+			character.moveForward(0.1f);
+		}else if (isKeyPressed('S')) {
+			// Move the character forward
+			character.moveForward(-0.1f);
+		}else if (isKeyPressed('A')) {
+			// Move the character forward
+			character.moveLeft(0.1f);
+		}else if (isKeyPressed('D')) {
+			// Move the character forward
+			character.moveLeft(-0.1f);
 		}
-		if (frameCount % 1000 == 0){
-			character.jump();
-		}
+		
 		//add sleep to control the frame rate.
 		// Calculate the time elapsed since the last frame
 		std::chrono::duration<float> elapsedTime = 
