@@ -95,7 +95,7 @@ int main() {
 
 	// Call createCharacter to initialize the character
 	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
-	character.createCharacter(physx::PxExtendedVec3(0.5, 1.0, 0.5), characterMaterial);
+	character.createCharacter(physx::PxExtendedVec3(-0.5, -1.0, 0.5), characterMaterial);
 
 	// Update and control the character in your game loop
 	character.moveForward(1.0f);
@@ -117,6 +117,7 @@ int main() {
 	
 	//create a simulation loop
 	const float timeStep = 1.0f / 60.0f;
+	int frameCount = 0;
 	while (true) {
 
 		// Process input and update character controller
@@ -126,7 +127,13 @@ int main() {
 		scene->simulate(timeStep);
 		scene->fetchResults(true);
 		// Update and control the character in your game loop
-		character.moveForward(1.0f);
+		++frameCount;
+		if (frameCount > 1000) {
+			character.moveForward(0.001f);
+		}
+		if (frameCount % 1000 == 0){
+			character.jump();
+		}
 		//add sleep to control the frame rate.
 		// Calculate the time elapsed since the last frame
 		std::chrono::duration<float> elapsedTime = 
