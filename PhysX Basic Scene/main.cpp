@@ -66,7 +66,11 @@ int main() {
 	PxMaterial* groundMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
 	PxTransform groundTransform = PxTransform(PxQuat(PxHalfPi, PxVec3(0, 0, 1)));
 	PxRigidStatic* groundPlane = PxCreateStatic(*physics, groundTransform, PxPlaneGeometry(), *groundMaterial);
-	//set the flags for collision callbacks between the floor and a box
+	
+	groundPlane->setActorFlag(PxActorFlag::eSEND_SLEEP_NOTIFIES, true);
+	
+
+	//set the flags for collision callbacks between the floor and a box - this second part is redundant. We are simply trying to identify the floor.
 	setupFiltering(groundPlane, FilterGroup::eFLOOR, FilterGroup::eBOX);
 	scene->addActor(*groundPlane);
 
@@ -83,7 +87,7 @@ int main() {
 		// Set the flag for notification callback when sleeping and waking
 		box->setActorFlag(PxActorFlag::eSEND_SLEEP_NOTIFIES, true);
 		//set the flags for collision callbacks between boxes
-		setupFiltering(box, FilterGroup::eBOX, FilterGroup::eBOX);
+		setupFiltering(box, FilterGroup::eBOX, FilterGroup::eBOX | FilterGroup::eFLOOR);
 		scene->addActor(*box);
 	}
 

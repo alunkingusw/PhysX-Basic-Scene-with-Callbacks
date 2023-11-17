@@ -33,7 +33,6 @@ void CharacterController::moveForward(float distance) {
     }
     // Implement movement logic
     if (capsuleController) {
-        std::cout << "Hi";
         // Get the current controller state
         physx::PxControllerState state;
         capsuleController->getState(state);
@@ -62,7 +61,7 @@ void CharacterController::moveLeft(float distance) {
         movement = -1;
     }
     if (capsuleController) {
-        std::cout << "Hi";
+        
         // Get the current controller state
         physx::PxControllerState state;
         capsuleController->getState(state);

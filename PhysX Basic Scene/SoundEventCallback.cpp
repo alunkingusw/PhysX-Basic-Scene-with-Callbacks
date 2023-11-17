@@ -6,11 +6,23 @@
         const physx::PxContactPair* pairs, physx::PxU32 nbPairs) {
         // Iterate through contact pairs
         
+         // Iterate through contact pairs
         for (physx::PxU32 i = 0; i < nbPairs; i++) {
             const physx::PxContactPair& cp = pairs[i];
-            // Handle collision events as needed
-            if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
-                std::cout << "Collision detected!" << std::endl;
+
+            // Get the filter data of the first and second shapes
+            physx::PxFilterData filterData0 = cp.shapes[0]->getSimulationFilterData();
+            physx::PxFilterData filterData1 = cp.shapes[1]->getSimulationFilterData();
+
+            // Check if it's eBOX colliding with eBOX
+            if ((filterData0.word0 & FilterGroup::eBOX) && (filterData1.word0 & FilterGroup::eBOX)) {
+                std::cout << "eBOX colliding with eBOX" << std::endl;
+            }
+
+            // Check if it's eBOX colliding with eFLOOR
+            if ((filterData0.word0 & FilterGroup::eBOX) && (filterData1.word0 & FilterGroup::eFLOOR) ||
+                (filterData0.word0 & FilterGroup::eFLOOR) && (filterData1.word0 & FilterGroup::eBOX)) {
+                std::cout << "eBOX colliding with eFLOOR" << std::endl;
             }
         }
     }
