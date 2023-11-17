@@ -26,8 +26,14 @@ void CharacterController::createCharacter(const physx::PxExtendedVec3& position,
 }
 
 void CharacterController::moveForward(float distance) {
+    //determine forward or backward based on the value
+    int movement = 1;
+    if (distance < 0) {
+        movement = -1;
+    }
     // Implement movement logic
     if (capsuleController) {
+        std::cout << "Hi";
         // Get the current controller state
         physx::PxControllerState state;
         capsuleController->getState(state);
@@ -36,7 +42,7 @@ void CharacterController::moveForward(float distance) {
         physx::PxTransform transform = capsuleController->getActor()->getGlobalPose();
 
         // Get the forward direction from the transform
-        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, 0, 1));
+        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, 0, 1*movement));
 
         // Calculate the movement vector
         physx::PxVec3 movement = forwardDir * distance;
@@ -50,7 +56,13 @@ void CharacterController::moveForward(float distance) {
 }
 void CharacterController::moveLeft(float distance) {
     // Implement movement logic
+    //determine left or right based on the value
+    int movement = 1;
+    if (distance < 0) {
+        movement = -1;
+    }
     if (capsuleController) {
+        std::cout << "Hi";
         // Get the current controller state
         physx::PxControllerState state;
         capsuleController->getState(state);
@@ -59,7 +71,7 @@ void CharacterController::moveLeft(float distance) {
         physx::PxTransform transform = capsuleController->getActor()->getGlobalPose();
 
         // Get the forward direction from the transform
-        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(1, 0, 0));
+        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(movement*1, 0, 0));
 
         // Calculate the movement vector
         physx::PxVec3 movement = forwardDir * distance;

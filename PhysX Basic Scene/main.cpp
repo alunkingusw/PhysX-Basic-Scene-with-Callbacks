@@ -119,10 +119,10 @@ int main() {
 			// Move the character forward
 			character.moveForward(-0.1f);
 		}else if (isKeyPressed('A')) {
-			// Move the character forward
+			// Move the character left
 			character.moveLeft(0.1f);
 		}else if (isKeyPressed('D')) {
-			// Move the character forward
+			// Move the character right
 			character.moveLeft(-0.1f);
 		}
 		
