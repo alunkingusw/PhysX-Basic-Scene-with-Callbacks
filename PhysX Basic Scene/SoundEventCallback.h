@@ -29,5 +29,6 @@ struct FilterGroup
     {
         eBOX = (1 << 0),
         eFLOOR = (1 << 1),
+        eCHARACTER = (1 << 2),
     };
 };

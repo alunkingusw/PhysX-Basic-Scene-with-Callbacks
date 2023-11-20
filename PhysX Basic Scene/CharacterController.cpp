@@ -1,5 +1,6 @@
 #include "CharacterController.h"
 
+
 CharacterController::CharacterController(physx::PxControllerManager* manager, physx::PxScene* scene)
     : controllerManager(manager), scene(scene), capsuleController(nullptr) {
 }
@@ -19,17 +20,19 @@ void CharacterController::createCharacter(const physx::PxExtendedVec3& position,
     desc.upDirection = physx::PxVec3(0, 1, 0);
     desc.position = position;
     desc.material = characterMaterial;
-    capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
-
+    if (capsuleController) {
+        capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
+        capsuleController->getActor()->setRigidBodyFlag(physx::PxRigidBodyFlag::eKINEMATIC, true);
+    }
     // Add the actor to the scene
     //scene->addActor(*capsuleController->getActor());
 }
 
 void CharacterController::moveForward(float distance) {
     //determine forward or backward based on the value
-    int movement = 1;
+    int movementDirection = 1;
     if (distance < 0) {
-        movement = -1;
+        movementDirection = -1;
         distance *= -1;
     }
     // Implement movement logic
@@ -37,12 +40,12 @@ void CharacterController::moveForward(float distance) {
         // Get the current controller state
         physx::PxControllerState state;
         capsuleController->getState(state);
-
+        
         // Get the controller's transform
         physx::PxTransform transform = capsuleController->getActor()->getGlobalPose();
 
         // Get the forward direction from the transform
-        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, 0, 1*movement));
+        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, 0, 1* movementDirection));
 
         // Calculate the movement vector
         physx::PxVec3 movement = forwardDir * distance;
@@ -57,9 +60,9 @@ void CharacterController::moveForward(float distance) {
 void CharacterController::moveLeft(float distance) {
     // Implement movement logic
     //determine left or right based on the value
-    int movement = 1;
+    int movementDirection = 1;
     if (distance < 0) {
-        movement = -1;
+        movementDirection = -1;
         distance *= -1;
     }
     if (capsuleController) {
@@ -71,7 +74,7 @@ void CharacterController::moveLeft(float distance) {
         physx::PxTransform transform = capsuleController->getActor()->getGlobalPose();
 
         // Get the forward direction from the transform
-        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, movement * 1, 0));
+        physx::PxVec3 forwardDir = transform.q.rotate(physx::PxVec3(0, movementDirection * 1, 0));
 
         // Calculate the movement vector
         physx::PxVec3 movement = forwardDir * distance;

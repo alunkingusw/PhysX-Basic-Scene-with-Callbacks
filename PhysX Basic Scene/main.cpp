@@ -84,7 +84,7 @@ int main() {
 		// Set the flag for notification callback when sleeping and waking
 		box->setActorFlag(PxActorFlag::eSEND_SLEEP_NOTIFIES, true);
 		//set the flags for collision callbacks between boxes
-		setupFiltering(box, FilterGroup::eBOX, FilterGroup::eBOX);
+		setupFiltering(box, FilterGroup::eBOX, FilterGroup::eBOX || FilterGroup::eCHARACTER);
 		scene->addActor(*box);
 	}
 
@@ -93,11 +93,13 @@ int main() {
 
 	// Create Character instance
 	CharacterController character(controllerManager, scene);
+	setupFiltering(controllerManager->getController(0)->getActor(), FilterGroup::eCHARACTER, FilterGroup::eBOX);
 
 	// Call createCharacter to initialize the character
 	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
-	character.createCharacter(physx::PxExtendedVec3(5.0, 0.5, 5.0), characterMaterial);
 
+	character.createCharacter(physx::PxExtendedVec3(5.0, 0.5, 5.0), characterMaterial);
+	
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 	
 	//create a simulation loop

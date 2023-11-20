@@ -5,6 +5,7 @@
 #include "PxPhysicsAPI.h"
 #include <iostream>;
 #include "Windows.h"
+#include <PxRigidBody.h>
 
 class CharacterController {
 public:
