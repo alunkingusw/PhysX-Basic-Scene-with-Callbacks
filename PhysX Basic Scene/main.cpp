@@ -112,16 +112,16 @@ int main() {
 		scene->fetchResults(true);
 		// Update and control the character in your game loop
 		++frameCount;
-		if (isKeyPressed('W')) {
+		if (isKeyPressed('w')) {
 			// Move the character forward
 			character.moveForward(0.1f);
-		}else if (isKeyPressed('S')) {
+		}else if (isKeyPressed('s')) {
 			// Move the character forward
 			character.moveForward(-0.1f);
-		}else if (isKeyPressed('A')) {
+		}else if (isKeyPressed('a')) {
 			// Move the character left
 			character.moveLeft(0.1f);
-		}else if (isKeyPressed('D')) {
+		}else if (isKeyPressed('d')) {
 			// Move the character right
 			character.moveLeft(-0.1f);
 		}
