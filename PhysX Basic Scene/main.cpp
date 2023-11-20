@@ -81,6 +81,7 @@ int main() {
 		PxTransform boxTransform(PxVec3(0.0f, i * (2 * boxHalfExtent + boxSpacing), 0.0f));
 		PxBoxGeometry boxGeometry(PxVec3(boxHalfExtent, boxHalfExtent, boxHalfExtent));
 		PxRigidDynamic* box = PxCreateDynamic(*physics, boxTransform, boxGeometry, *boxMaterial, 1.0f);
+		box->setMass(0.5f);
 		// Set the flag for notification callback when sleeping and waking
 		box->setActorFlag(PxActorFlag::eSEND_SLEEP_NOTIFIES, true);
 		//set the flags for collision callbacks between boxes
@@ -93,7 +94,7 @@ int main() {
 
 	// Create Character instance
 	CharacterController character(controllerManager, scene);
-	setupFiltering(controllerManager->getController(0)->getActor(), FilterGroup::eCHARACTER, FilterGroup::eBOX);
+	//setupFiltering(character->getActor(), FilterGroup::eCHARACTER, FilterGroup::eBOX);
 
 	// Call createCharacter to initialize the character
 	physx::PxMaterial* characterMaterial = physics->createMaterial(0.5f, 0.5f, 0.1f);
