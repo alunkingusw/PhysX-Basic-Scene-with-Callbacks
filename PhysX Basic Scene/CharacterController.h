@@ -6,6 +6,7 @@
 #include <iostream>;
 #include "Windows.h"
 #include <PxRigidBody.h>
+#include "SoundEventCallback.h"
 
 class CharacterController {
 public:

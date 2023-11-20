@@ -20,12 +20,17 @@ void CharacterController::createCharacter(const physx::PxExtendedVec3& position,
     desc.upDirection = physx::PxVec3(0, 1, 0);
     desc.position = position;
     desc.material = characterMaterial;
-    if (capsuleController) {
-        capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
-        capsuleController->getActor()->setRigidBodyFlag(physx::PxRigidBodyFlag::eKINEMATIC, true);
-    }
     // Add the actor to the scene
-    //scene->addActor(*capsuleController->getActor());
+    capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
+    
+    if (capsuleController) {
+        capsuleController->getActor()->setRigidBodyFlag(physx::PxRigidBodyFlag::eKINEMATIC, true);
+        setupFiltering(capsuleController->getActor(), FilterGroup::eCHARACTER, FilterGroup::eBOX);
+        //std::cout << "Adding character";
+        //scene->addActor(*capsuleController->getActor());
+    }
+    
+    
 }
 
 void CharacterController::moveForward(float distance) {
