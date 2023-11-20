@@ -4,6 +4,7 @@
 #include <conio.h>
 #include "PxPhysicsAPI.h"
 #include <iostream>;
+#include "Windows.h"
 
 class CharacterController {
 public:
@@ -14,13 +15,10 @@ public:
     void moveForward(float distance);
     void moveLeft(float distance);
     void jump();
-    void update(float deltaTime);
+    void update();
 
 private:
     physx::PxControllerManager* controllerManager;
     physx::PxScene* scene;
     physx::PxCapsuleController* capsuleController;
 };
-
-bool isKeyPressed(int key);
-

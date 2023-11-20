@@ -5,6 +5,7 @@
 #include "PxPhysicsAPI.h"
 #include "SoundEventCallback.h"
 #include "CharacterController.h"
+
 using namespace physx;
 
 PxPvd* mPvd = NULL;
@@ -102,7 +103,10 @@ int main() {
 	//create a simulation loop
 	const float timeStep = 1.0f / 60.0f;
 	int frameCount = 0;
+	
 	while (true) {
+		
+		
 
 		// Process input and update character controller
 		//characterController->update(timeStep);
@@ -112,19 +116,8 @@ int main() {
 		scene->fetchResults(true);
 		// Update and control the character in your game loop
 		++frameCount;
-		if (isKeyPressed('w')) {
-			// Move the character forward
-			character.moveForward(0.1f);
-		}else if (isKeyPressed('s')) {
-			// Move the character forward
-			character.moveForward(-0.1f);
-		}else if (isKeyPressed('a')) {
-			// Move the character left
-			character.moveLeft(0.1f);
-		}else if (isKeyPressed('d')) {
-			// Move the character right
-			character.moveLeft(-0.1f);
-		}
+		character.update();
+		
 		
 		//add sleep to control the frame rate.
 		// Calculate the time elapsed since the last frame

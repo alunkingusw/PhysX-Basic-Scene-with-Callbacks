@@ -99,11 +99,22 @@ void CharacterController::jump() {
     }
 }
 
-void CharacterController::update(float deltaTime) {
+void CharacterController::update() {
     // Implement update logic
-}
+    if (GetAsyncKeyState(VK_UP) < 0) {
+        moveForward(0.01f);
+    }
 
-bool isKeyPressed(int key)
-{
-    return _kbhit() && _getch() == key;
+    if (GetAsyncKeyState(VK_DOWN) < 0) {
+        moveForward(-0.01f);
+    }
+
+    if (GetAsyncKeyState(VK_LEFT) < 0) {
+        moveLeft(0.01f);
+    }
+
+    if (GetAsyncKeyState(VK_RIGHT) < 0) {
+        moveLeft(-0.01f);
+    }
+
 }
