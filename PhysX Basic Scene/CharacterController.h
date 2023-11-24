@@ -8,6 +8,7 @@
 #include <PxRigidBody.h>
 #include "SoundEventCallback.h"
 
+//the following callback is referenced here: https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/CharacterControllers.html#hit-callback
 class CharacterControllerHitReport : public physx::PxUserControllerHitReport {
 public:
     // Override the onShapeHit method
