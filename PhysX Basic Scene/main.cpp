@@ -105,7 +105,7 @@ int main() {
 	std::chrono::steady_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 	
 	//create a simulation loop
-	const float timeStep = 1.0f / 60.0f;
+	const float timeStep = 1.0f / 120.0f;
 	int frameCount = 0;
 	
 	while (true) {

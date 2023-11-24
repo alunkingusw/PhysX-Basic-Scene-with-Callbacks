@@ -13,6 +13,7 @@ CharacterController::~CharacterController() {
 
 void CharacterController::createCharacter(const physx::PxExtendedVec3& position, physx::PxMaterial* characterMaterial) {
     // Create capsule controller
+    characterHitReport = new CharacterControllerHitReport();
     physx::PxCapsuleControllerDesc desc;
     desc.setToDefault();
     desc.radius = 0.5f;
@@ -20,6 +21,7 @@ void CharacterController::createCharacter(const physx::PxExtendedVec3& position,
     desc.upDirection = physx::PxVec3(0, 1, 0);
     desc.position = position;
     desc.material = characterMaterial;
+    desc.reportCallback = characterHitReport;
     // Add the actor to the scene
     capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
     
@@ -107,7 +109,22 @@ void CharacterController::jump() {
     }
 }
 
+void CharacterController::addGravity() {
+    // Implement gravity
+    if (capsuleController) {
+        // Set an upward velocity for jumping
+        physx::PxVec3 down(0.0f, -1.0f, 0.0f);
+        // Move the controller
+        physx::PxControllerFilters filters;
+        capsuleController->move(down, 0.0f, 0.001f, filters);
+    }
+}
+
+
 void CharacterController::update() {
+
+    addGravity();
+
     // Implement update logic
     if (GetAsyncKeyState(VK_UP) < 0) {
         moveForward(0.01f);
