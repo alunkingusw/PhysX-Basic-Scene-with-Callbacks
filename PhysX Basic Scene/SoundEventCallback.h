@@ -1,10 +1,14 @@
 #pragma once
 #include "PxPhysicsAPI.h";
 #include <iostream>;
+#include "FmodStudio/inc/fmod.hpp";
+#include "SoundManager.h";
 
 
 class SoundEventCallback : public physx::PxSimulationEventCallback{
 public:
+    SoundEventCallback();
+    ~SoundEventCallback();
 
     virtual void onContact(const physx::PxContactPairHeader& pairHeader, 
         const physx::PxContactPair* pairs, physx::PxU32 nbPairs) override;
@@ -15,6 +19,10 @@ public:
         const physx::PxTransform* poseBuffer, const physx::PxU32 count) override;
     virtual void onConstraintBreak(physx::PxConstraintInfo* constraints, physx::PxU32 count) override;
     
+private:
+    SoundManager soundManager;
+    FMOD::Sound* collisionSound;
+
 };
 physx::PxFilterFlags boxCollisionFilterShader(
     physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,

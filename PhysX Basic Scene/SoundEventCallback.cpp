@@ -1,8 +1,28 @@
 #include "SoundEventCallback.h"
 
+FMOD::System* FMSystem;
+
 // Custom collision callback class
 
-    void SoundEventCallback::onContact(const physx::PxContactPairHeader& pairHeader, 
+ 
+    SoundEventCallback::SoundEventCallback()
+    {
+        // Initialize sound manager
+        soundManager.initialize();
+
+        // Load collision sound
+        collisionSound = soundManager.loadSound("collision_sound.mp3");
+    }
+
+    SoundEventCallback::~SoundEventCallback() {
+        // Unload resources
+        if (collisionSound) {
+            collisionSound->release();
+        }
+    }
+
+
+void SoundEventCallback::onContact(const physx::PxContactPairHeader& pairHeader,
         const physx::PxContactPair* pairs, physx::PxU32 nbPairs) {
         // Iterate through contact pairs
         

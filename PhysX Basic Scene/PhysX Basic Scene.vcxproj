@@ -105,10 +105,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Alun\source\repos\PhysX Basic Scene\PhysX Basic Scene\FmodStudio\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Alun\source\repos\PhysX Basic Scene\PhysX Basic Scene\FmodStudio\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,10 +136,15 @@
     <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SoundEventCallback.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterController.h" />
     <ClInclude Include="SoundEventCallback.h" />
+    <ClInclude Include="SoundManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="D:\Documents\Downloads\DX11_CS3S664_Karting - VS2019V2\Resources\Sounds\fart.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

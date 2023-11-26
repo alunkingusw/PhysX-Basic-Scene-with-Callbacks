@@ -27,6 +27,9 @@
     <ClCompile Include="CharacterController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundEventCallback.h">
@@ -35,5 +38,13 @@
     <ClInclude Include="CharacterController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="D:\Documents\Downloads\DX11_CS3S664_Karting - VS2019V2\Resources\Sounds\fart.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
