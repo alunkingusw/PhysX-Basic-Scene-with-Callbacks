@@ -1,7 +1,7 @@
 #pragma once
 #include "PxPhysicsAPI.h";
 #include <iostream>;
-#include "FmodStudio/inc/fmod.hpp";
+#include "fmod.hpp";
 #include "SoundManager.h";
 
 

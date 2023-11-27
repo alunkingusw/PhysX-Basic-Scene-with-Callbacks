@@ -1,5 +1,5 @@
 #pragma once
-#include "FmodStudio/inc/fmod.hpp";
+#include "fmod.hpp";
 class SoundManager {
 public:
     SoundManager();

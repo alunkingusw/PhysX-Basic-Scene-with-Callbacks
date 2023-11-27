@@ -11,7 +11,7 @@ FMOD::System* FMSystem;
         soundManager.initialize();
 
         // Load collision sound
-        collisionSound = soundManager.loadSound("collision_sound.mp3");
+        collisionSound = soundManager.loadSound("fart.wav");
     }
 
     SoundEventCallback::~SoundEventCallback() {
@@ -31,6 +31,7 @@ void SoundEventCallback::onContact(const physx::PxContactPairHeader& pairHeader,
             // Handle collision events as needed
             if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
                 std::cout << "Collision detected!" << std::endl;
+                soundManager.playSound(collisionSound);
             }
         }
     }
