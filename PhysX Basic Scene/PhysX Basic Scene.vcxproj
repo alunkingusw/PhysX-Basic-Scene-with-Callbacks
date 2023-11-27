@@ -77,12 +77,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\aking1\source\repos\alunkingusw\PhysX-Basic-Scene-with-Callbacks\packages\FmodStudio\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\packages\FmodStudio\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\aking1\source\repos\alunkingusw\PhysX-Basic-Scene-with-Callbacks\packages\FmodStudio\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\packages\FmodStudio\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -154,7 +154,7 @@
     <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="D:\Documents\Downloads\DX11_CS3S664_Karting - VS2019V2\Resources\Sounds\fart.wav" />
+    <Media Include="fart.wav" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PhysX Basic Scene.rc" />
