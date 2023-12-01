@@ -1,8 +1,5 @@
 #include "SoundManager.h";
 
-
-
-
 SoundManager::SoundManager() : system(nullptr) {}
 
 SoundManager::~SoundManager() {

@@ -13,7 +13,7 @@ CharacterController::~CharacterController() {
 
 void CharacterController::createCharacter(const physx::PxExtendedVec3& position, physx::PxMaterial* characterMaterial) {
     // Create capsule controller
-    //characterHitReport = new CharacterControllerHitReport();
+    characterHitReport = new CharacterControllerHitReport();
     physx::PxCapsuleControllerDesc desc;
     desc.setToDefault();
     desc.radius = 0.5f;
@@ -21,7 +21,7 @@ void CharacterController::createCharacter(const physx::PxExtendedVec3& position,
     desc.upDirection = physx::PxVec3(0, 1, 0);
     desc.position = position;
     desc.material = characterMaterial;
-    //desc.reportCallback = characterHitReport;
+    desc.reportCallback = characterHitReport;
     // Add the actor to the scene
     capsuleController = static_cast<physx::PxCapsuleController*>(controllerManager->createController(desc));
     
